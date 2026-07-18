@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Einundzwanzig Meetup Badges</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<script src="js/theme.js"></script>
+<script src="js/include.js"></script>
+<body>
+<div class="nav-container" data-include="components/nav.html"></div>
+
+<h1>Digitale Reputation</h1>
+<h2>Was ist das Problem?</h2>
+<p>
+Im digitalen Raum wird es immer schwieriger, Vertrauen zwischen Menschen aufzubauen.
+Ein Profil oder ein Account allein sagt wenig darüber aus, ob dahinter eine echte Person steht, ob jemand tatsächlich Teil einer Community ist oder ob eine Reputation wirklich verdient wurde.
+</p>
+<p>
+<h4>Besonders durch anonyme Accounts, Bots und KI-generierte Inhalte wird die Frage wichtiger:</h4>
+</p>
+<ul>
+    <li>Wer steckt wirklich hinter einem Account?</li>
+    <li>Ist diese Person tatsächlich Teil einer Community?</li>
+    <li>Hat sie reale Erfahrungen gesammelt und an Veranstaltungen teilgenommen?</li>
+    <li>Ist ein Online-Profil gewachsen oder wurde es gerade erst erstellt?</li>
+    <li>Wie kann Vertrauen entstehen, ohne eine zentrale Plattform mit persönlichen Identitätsdaten zu benötigen?</li>
+</ul>
+
+<p>
+<h4>Bisherige Lösungen haben häufig Nachteile:</h4>
+</p>
+<ul>
+    <li>Accounts auf zentralen Plattformen → Abhängigkeit von einem Anbieter und einer zentralen Datenbank</li>
+    <li>E-Mail-Adresse oder Telefonnummer → Verknüpfung mit persönlichen Daten</li>
+    <li>Teilnehmerlisten → Sammlung sensibler Informationen</li>
+    <li>Likes, Follower und Bewertungen → leicht manipulierbare digitale Signale</li>
+</ul>
+
+<p>
+Die <a href="https://zapstore.dev/apps/space.einundzwanzig.meetup" target="_blank" rel="noopener">21Meetup</a> App verfolgt einen anderen Ansatz:
+Sie verwandelt eine reale Teilnahme an einem Meetup in einen kryptografisch überprüfbaren Nachweis.
+</p>
+<p>
+Ein Badge beweist nicht die Identität einer Person, sondern schafft ein verifizierbares Vertrauenssignal:
+Diese Person war tatsächlich bei einer Veranstaltung anwesend und hat über Zeit aktiv an einer Community teilgenommen.
+</p>
+
+<h1>Wie digitale Reputation entsteht</h1>
+<p>Ein digitales Badge soll einen echten Besuch eines Meetups repräsentieren. Damit ein Badge einen Wert erhält, muss der Erwerb mit einem nachvollziehbaren Aufwand („Cost“) verbunden sein.</p>
+<p>Dieser Aufwand kann sich aus verschiedenen Faktoren zusammensetzen:</p>
+<ul>
+    <li><strong>Zeit:</strong> Der Teilnehmer muss tatsächlich am Meetup teilnehmen und vor Ort anwesend sein.</li>
+    <li><strong>Regelmäßigkeit:</strong> Wer regelmäßig Meetups besucht, investiert dauerhaft Zeit und Engagement in die Community.</li>
+    <li><strong>Teilnehmerzahl:</strong> Größere Meetups können den Reputationswert stärker erhöhen, da dort mehr Teilnehmer aus der Community zusammenkommen und der soziale Nachweis stärker ist.</li>
+</ul>
+<p>Durch diese Faktoren wird verhindert, dass digitale Badges beliebig gesammelt werden können, ohne tatsächlich an Veranstaltungen teilzunehmen. Die Reputation entsteht dadurch nicht durch die Anzahl gespeicherter Badges allein, sondern durch nachweisbare reale Teilnahme und aktives Engagement innerhalb der Community.</p>
+
+<h1>Einundzwanzig Meetup Badges</h1>
+<p>
+    Dein Badge ist ein digitaler, kryptografisch signierter Nachweis deiner tatsächlichen Teilnahme am Meetup.
+    Es verbindet einfache Nutzung mit moderner Technik durch NFC oder Rolling QR-Codes.
+</p>
+
+<div class="card">
+    <h2>1. Meetup besuchen</h2>
+    <p>Nimm an einem lokalen Bitcoin-Meetup teil. Vor Ort befindet sich der Veranstaltungs-Badge als Nachweis für dieses Event.</p>
+</div>
+
+<div class="card">
+    <h2>2. Badge scannen</h2>
+    <p>Scanne den Badge direkt vor Ort mit deinem Smartphone. Dies funktioniert entweder über den NFC-Chip oder alternativ über einen Rolling QR-Code.</p>
+    <ul>
+        <li>NFC: Smartphone an den Badge halten</li>
+        <li>Rolling QR-Code: Mit der Kamera scannen</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>3. Teilnahme bestätigen</h2>
+    <p>
+        Die App prüft die relevanten Event-Daten lokal auf deinem Gerät, um sicherzustellen, dass der Nachweis tatsächlich zu diesem Meetup gehört.
+    </p>
+    <ul>
+        <li>Zeitpunkt des Scans</li>
+        <li>Standort (lokal ausgewertet – nur bei physischer Anwesenheit wird der Badge freigeschaltet)</li>
+        <li>Zugehöriges Meetup-Event</li>
+        <li>Organisatorische Zuordnung</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>4. Dein Nachweis</h2>
+    <p>
+        Nach erfolgreicher Bestätigung erhältst du einen digitalen Badge.
+        Dieser wird mit <strong>zwei Schnorr-Signaturen</strong> (Organisator + deine Signatur) gesichert und dezentral im Nostr-Netzwerk gespeichert.
+    </p>
+</div>
+
+<h2>Warum NFC?</h2>
+<ul>
+    <li>Keine eigene Stromversorgung notwendig</li>
+    <li>Sehr kurze Reichweite – bewusste Nähe zwischen Teilnehmer und Token</li>
+    <li>Schnelle und einfache Bedienung durch Auflegen des Smartphones</li>
+    <li>Unterstützung durch nahezu alle modernen Smartphones</li>
+    <li>Kein Login oder manuelle Eingabe notwendig</li>
+</ul>
+
+<h2>Warum Rolling QR-Code?</h2>
+<ul>
+    <li>Alternative für Geräte ohne NFC-Unterstützung</li>
+    <li>Kein physischer NFC-Tag erforderlich</li>
+    <li>Mit nahezu jedem Smartphone über die Kamera nutzbar</li>
+    <li>Einfache Integration in digitale oder öffentliche Anzeigen</li>
+    <li>Der regelmäßig wechselnde QR-Code erschwert das Kopieren und spätere Weitergeben eines gültigen Codes</li>
+    <li>Ermöglicht zeitlich begrenzte Nachweise der tatsächlichen Anwesenheit</li>
+</ul>
+
+<!-- Backup-Warnung als eigene Card -->
+<div class="card" style="border: 2px solid var(--accent); background: var(--card);">
+    <h2 style="color: var(--accent); margin-top: 0;">⚠️ Wichtig: Regelmäßige Backups machen!</h2>
+    <p>
+        Da 21Meetup komplett dezentral arbeitet, liegen alle deine Badges und dein gesamter Trust Score nur auf deinem Gerät.<br><br>
+        <strong>Geht das Handy verloren oder wird kein Backup erstellt, ist deine komplette digitale Reputation unwiederbringlich verloren.</strong><br><br>
+        Sichere deine App daher regelmäßig – genau wie deine Bitcoin-Wallet.
+    </p>
+</div>
+
+<p style="text-align: center; margin: 40px 0;">
+    <a href="technik.html" style="font-weight: bold; font-size: 1.1rem;">
+        Mehr über die technische Umsetzung (Schnorr-Signaturen, Nostr, Web of Trust) →
+    </a>
+</p>
+
+<div data-include="components/footer.html"></div>
+
+<script src="js/include.js"></script>
+</body>
+</html>

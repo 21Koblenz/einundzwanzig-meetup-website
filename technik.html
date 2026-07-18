@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technische Umsetzung der 21Meetup Badges</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="nav-container" data-include="components/nav.html"></div>
+
+<main>
+    <h1>Technische Umsetzung der 21Meetup Badges</h1>
+
+    <div class="intro box">
+        <p>
+            Ein 21Meetup Badge verbindet physische Anwesenheit vor Ort mit einem kryptografisch abgesicherten digitalen Nachweis.
+            Die Technik basiert auf offenen Standards und legt großen Wert auf Privatsphäre und Dezentralität.
+        </p>
+    </div>
+
+    <h2>Aufbau eines Badges</h2>
+    <div class="box">
+        <pre>
+21Meetup Badge
+ |
+ ├── Physischer Trigger (NFC / Rolling QR)
+ |
+ ├── Event-Metadaten (ID, Zeit, Ort)
+ |
+ ├── Kryptografische Signaturen (Schnorr)
+ |
+ └── Lokale Speicherung auf dem Smartphone
+        </pre>
+    </div>
+
+    <h2>Physische Absicherung: NFC &amp; Rolling QR-Codes</h2>
+    <div class="box">
+        <h2>NFC-Technologie</h2>
+        <p>Der physische Badge verwendet einen passiven NFC-Chip (z. B. NTAG215).</p>
+        <ul>
+            <li>Keine eigene Stromversorgung nötig</li>
+            <li>Sehr kurze Reichweite (wenige Zentimeter) → erzwingt echte physische Präsenz</li>
+            <li>Enthält nur eine Event-Kennung – keine persönlichen Daten</li>
+        </ul>
+
+        <h2>Rolling QR-Code</h2>
+        <p>Alternative für Geräte ohne NFC. Der QR-Code ändert sich regelmäßig, sodass ein einmal gescannter Code schnell ungültig wird.</p>
+    </div>
+
+    <h2>Kryptografische Absicherung</h2>
+    <div class="box">
+        <p>
+            Jeder Badge wird mit <strong>zwei Schnorr-Signaturen</strong> (BIP-340) gesichert:
+        </p>
+        <ul>
+            <li><strong>Organisator-Signatur</strong> – bestätigt die Echtheit des Meetups</li>
+            <li><strong>Teilnehmer-Signatur</strong> – bindet den Badge an deine private Nostr-Identität</li>
+        </ul>
+        <p>
+            Nur die Kombination beider Signaturen ergibt einen gültigen Badge.
+        </p>
+    </div>
+
+    <h2>Speicherung &amp; Privatsphäre</h2>
+    <div class="box">
+        <p>
+            <strong>Aus Datenschutzgründen werden deine Badges lokal auf deinem Smartphone gespeichert</strong> und nicht öffentlich ins Nostr-Netzwerk gepostet.
+        </p>
+        <p>
+            Das schützt deine Teilnahmehistorie vor unerwünschter Einsehbarkeit. Nur du hast Zugriff auf deine vollständige Badge-Sammlung.
+        </p>
+    </div>
+
+    <h2>Technischer Ablauf</h2>
+    <div class="box">
+        <pre>
+Smartphone → NFC / QR-Scan
+         ↓
+Lokale Prüfung:
+   • Zeitfenster
+   • Standort (lokal ausgewertet)
+   • Event-ID
+         ↓
+Signierung durch Organisator + Teilnehmer (Schnorr)
+         ↓
+Erstellung des Badges
+         ↓
+Sichere lokale Speicherung auf dem Gerät
+        </pre>
+    </div>
+
+
+
+    <h2>Warum der Badge nicht kopierbar ist</h2>
+    <div class="box">
+        <ul>
+            <li><strong>Zeitliche Bindung</strong>: Scan nur während des Events möglich</li>
+            <li><strong>Lokale Standortprüfung</strong>: Die App prüft auf deinem Gerät, ob du dich tatsächlich am Veranstaltungsort befindest</li>
+            <li><strong>Rolling Codes</strong>: QR-Codes verfallen schnell</li>
+            <li><strong>Doppelte Signatur</strong>: Ohne Signatur des Organisators ist der Badge wertlos</li>
+        </ul>
+    </div>
+
+    <h2>Nostr &amp; Dezentralität</h2>
+    <div class="box">
+        <p>
+            Die App nutzt das Nostr-Protokoll für deine Identität und zukünftige Backup-Funktionen.
+            Deine eigentlichen Badges bleiben jedoch privat auf dem Gerät.
+        </p>
+        <ul>
+            <li>Deine Identität ist ein selbstverwaltetes kryptografisches Schlüsselpaar</li>
+            <li>Optional: Höchste Sicherheit mit <strong>Amber</strong> (separater Key-Manager)</li>
+            <li>Dein Trust Score und Web of Trust werden lokal aus den gesammelten Badges berechnet</li>
+        </ul>
+    </div>
+
+    <!-- Backup-Warnung -->
+    <div class="box" style="border: 2px solid var(--accent);">
+        <h2 style="color: var(--accent); margin-top: 0;">⚠️ Wichtig: Regelmäßige Backups!</h2>
+        <p>
+            Da deine Badges lokal auf dem Smartphone gespeichert werden, sind sie nur auf diesem Gerät vorhanden.<br><br>
+            <strong>Geht das Handy verloren oder wird kein Backup erstellt, ist deine komplette digitale Reputation unwiederbringlich verloren.</strong><br><br>
+            Sichere deine App daher regelmäßig – genau wie deine Bitcoin-Wallet.
+        </p>
+    </div>
+
+    <h2>Ziel der Technologie</h2>
+    <div class="box">
+        <ul>
+            <li>Einfache Nutzung ohne zentrale Registrierung</li>
+            <li>Maximale Fälschungssicherheit durch Kombination aus Physischem und Kryptografie</li>
+            <li>Starker Datenschutz durch lokale Speicherung</li>
+            <li>Aufbau eines echten Web of Trust basierend auf realer Anwesenheit</li>
+        </ul>
+    </div>
+</main>
+
+<div data-include="components/footer.html"></div>
+
+<script src="js/theme.js"></script>
+<script src="js/include.js"></script>
+</body>
+</html>
