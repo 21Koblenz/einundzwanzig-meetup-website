@@ -20,8 +20,8 @@
 
 .light-mode {
     --bg: #F8F9FA;
-    --card: #FFFFFF;
-    --surface: #F1F3F5;
+    --card: #EBEEF2;
+    --surface: #E4E8ED;
     --hover: #E9ECEF;
     --text: #0F0F11;
     --text-sec: #495057;
@@ -29,8 +29,8 @@
     --muted: #4b5563;
     --accent: #F7931A;
     --accent-light: #E07810;
-    --border: #DEE2E6;
-    --tile-border: #CED4DA;
+    --border: #D1D6E0;
+    --tile-border: #C8CED8;
     --shadow: rgba(0,0,0,0.12);
     --glow: transparent;
     --toggle-bg: #111111;
@@ -83,11 +83,35 @@ body {
 body.loaded {
     opacity: 1;
 }
+/* ====================== BANNER und Nav====================== */
 
 .nav-container {
-    text-align: center;
+    width: 100%;
     min-height: 85px;
+    text-align: center;
 }
+
+.banner-dark,
+.banner-light {
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    margin: 0 auto 30px;
+}
+
+.banner-light {
+    display: none;
+}
+
+.light-mode .banner-dark {
+    display: none;
+}
+
+.light-mode .banner-light {
+    display: block;
+}
+
 nav {
     display: flex;
     justify-content: center;
@@ -161,7 +185,7 @@ p {
     padding: 28px;
     margin: 25px 0;
     box-shadow:
-        0 8px 25px rgba(0,0,0,0.25);
+    0 8px 25px rgba(0,0,0,0.25);
 
     transition: transform 0.3s ease, box-shadow 0.3 ease;
 }
@@ -179,8 +203,10 @@ p {
 .card:hover,
 .box:hover {
 
-    transform: translateY(-6px);
-    box-shadow: 0 15px 35px rgba(247, 147, 26, 0.2);
+    transform: translateY(-12px);
+    box-shadow:
+    0 20px 40px rgba(0,0,0,0.35),
+    0 0 30px rgba(247, 147, 26, 0.55) !important;
 
 }
 
@@ -367,38 +393,69 @@ footer a:hover {
     box-shadow: 0 4px 15px var(--shadow);
 }
 
-/* Mobile Optimierung */
-@media(max-width:600px) {
-    .lightning-address {
-        font-size: 1rem;
-    }
-}
-/* Standard = Dark Mode */
-.qr-light {
-    display: none;
-}
+/* ====================== MOBILE OPTIMIERUNG ====================== */
+@media (max-width: 767px) {
 
-.qr-dark {
-    display: inline-block;
-}
-
-
-/* Light Mode */
-.light-mode .qr-dark {
-    display: none;
-}
-
-.light-mode .qr-light {
-    display: inline-block;
-}
-/* Mobile */
-@media(max-width:600px) {
     h1 {
         font-size: 2rem;
     }
+
+    .lightning-address {
+        font-size: 1rem;
+    }
+
     .footer-logo img {
         width: 280px;
         max-width: 280px;
+    }
+
+    /* GLOW AUF MOBILE (Smoothe Einblendung) */
+    .card,
+    .box {
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card.in-view,
+    .box.in-view {
+        transform: translateY(-12px);
+        box-shadow:
+        0 20px 40px rgba(0,0,0,0.35),
+        0 0 30px rgba(247, 147, 26, 0.55) !important;
+    }
+
+    .card a,
+    .btn-primary {
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Glow + Lift wenn die Card in der Mitte ist */
+    .card.in-view a,
+    .card.in-view .btn-primary {
+        transform: translateY(-4px);
+        box-shadow:
+        0 5px 15px rgba(0,0,0,0.25),
+        0 0 18px rgba(247, 147, 26, 0.65),
+        0 0 30px rgba(247, 147, 26, 0.4) !important;
+    }
+
+
+    /* Standard = Dark Mode */
+    .qr-light {
+        display: none;
+    }
+
+    .qr-dark {
+        display: inline-block;
+    }
+
+
+    /* Light Mode */
+    .light-mode .qr-dark {
+        display: none;
+    }
+
+    .light-mode .qr-light {
+        display: inline-block;
     }
 }
 /* ====================== Npub Darstellung ====================== */
@@ -441,31 +498,4 @@ footer a:hover {
 .copy-button:hover {
     opacity: 0.8;
 }
-/* ====================== BANNER ====================== */
 
-.nav-container {
-    width: 100%;
-    text-align: center;
-}
-.banner-dark,
-.banner-light {
-    display: block;
-    width: 100%;
-    max-width: 900px;
-    height: auto;
-    margin: 0 auto 30px auto;
-}
-/* Dark Mode */
-.banner-dark {
-    display: block;
-}
-.banner-light {
-    display: none;
-}
-/* Light Mode */
-.light-mode .banner-dark {
-    display: none;
-}
-.light-mode .banner-light {
-    display: block;
-}
