@@ -392,7 +392,24 @@ footer a:hover {
     border-radius: 12px;
     box-shadow: 0 4px 15px var(--shadow);
 }
+/* Standard = Dark Mode */
+.qr-light {
+    display: none;
+}
 
+.qr-dark {
+    display: inline-block;
+}
+
+
+/* Light Mode */
+.light-mode .qr-dark {
+    display: none;
+}
+
+.light-mode .qr-light {
+    display: inline-block;
+}
 /* ====================== MOBILE OPTIMIERUNG ====================== */
 @media (max-width: 767px) {
 
@@ -438,25 +455,6 @@ footer a:hover {
         0 0 30px rgba(247, 147, 26, 0.4) !important;
     }
 
-
-    /* Standard = Dark Mode */
-    .qr-light {
-        display: none;
-    }
-
-    .qr-dark {
-        display: inline-block;
-    }
-
-
-    /* Light Mode */
-    .light-mode .qr-dark {
-        display: none;
-    }
-
-    .light-mode .qr-light {
-        display: inline-block;
-    }
 }
 /* ====================== Npub Darstellung ====================== */
 .npub-box {
