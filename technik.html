@@ -1,144 +1,353 @@
 <!DOCTYPE html>
-<html lang="de">
+
+<html data-theme="dark" lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technische Umsetzung der 21Meetup Badges</title>
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="So verifiziert 21Meetup Badges mit Nostr, Schnorr-Signaturen, Rolling QR, NFC und defensiver Datenprüfung." name="description"/>
+<title>21Meetup – Technische Umsetzung</title>
+<link href="https://21koblenz.github.io/einundzwanzig-meetup-website/technik.html" rel="canonical"/><meta content="website" property="og:type"/><meta content="21Meetup" property="og:site_name"/><meta content="de_DE" property="og:locale"/><meta content="21Meetup – Technische Umsetzung" property="og:title"/><meta content="So verifiziert 21Meetup Badges mit Nostr, Schnorr-Signaturen, Rolling QR, NFC und defensiver Datenprüfung." property="og:description"/><meta content="https://21koblenz.github.io/einundzwanzig-meetup-website/technik.html" property="og:url"/><meta content="https://21koblenz.github.io/einundzwanzig-meetup-website/assets/social-preview.jpg" property="og:image"/><meta content="https://21koblenz.github.io/einundzwanzig-meetup-website/assets/social-preview.jpg" property="og:image:secure_url"/><meta content="image/jpeg" property="og:image:type"/><meta content="1200" property="og:image:width"/><meta content="630" property="og:image:height"/><meta content="21Meetup – Meetup-Teilnahme kryptografisch belegbar machen" property="og:image:alt"/><meta content="summary_large_image" name="twitter:card"/><meta content="21Meetup – Technische Umsetzung" name="twitter:title"/><meta content="So verifiziert 21Meetup Badges mit Nostr, Schnorr-Signaturen, Rolling QR, NFC und defensiver Datenprüfung." name="twitter:description"/><meta content="https://21koblenz.github.io/einundzwanzig-meetup-website/assets/social-preview.jpg" name="twitter:image"/><meta content="21Meetup – Meetup-Teilnahme kryptografisch belegbar machen" name="twitter:image:alt"/><link href="css/style.css" rel="stylesheet"/>
 </head>
 <body>
-<div class="nav-container" data-include="components/nav.html"></div>
-
-<main>
-    <h1>Technische Umsetzung der 21Meetup Badges</h1>
-
-    <div class="intro box">
-        <p>
-            Ein 21Meetup Badge verbindet physische Anwesenheit vor Ort mit einem kryptografisch abgesicherten digitalen Nachweis.
-            Die Technik basiert auf offenen Standards und legt großen Wert auf Privatsphäre und Dezentralität.
-        </p>
-    </div>
-
-    <h2>Aufbau eines Badges</h2>
-    <div class="box">
-        <pre>
-21Meetup Badge
- |
- ├── Physischer Trigger (NFC / Rolling QR)
- |
- ├── Event-Metadaten (ID, Zeit, Ort)
- |
- ├── Kryptografische Signaturen (Schnorr)
- |
- └── Lokale Speicherung auf dem Smartphone
-        </pre>
-    </div>
-
-    <h2>Physische Absicherung: NFC &amp; Rolling QR-Codes</h2>
-    <div class="box">
-        <h2>NFC-Technologie</h2>
-        <p>Der physische Badge verwendet einen passiven NFC-Chip (z. B. NTAG215).</p>
-        <ul>
-            <li>Keine eigene Stromversorgung nötig</li>
-            <li>Sehr kurze Reichweite (wenige Zentimeter) → erzwingt echte physische Präsenz</li>
-            <li>Enthält nur eine Event-Kennung – keine persönlichen Daten</li>
-        </ul>
-
-        <h2>Rolling QR-Code</h2>
-        <p>Alternative für Geräte ohne NFC. Der QR-Code ändert sich regelmäßig, sodass ein einmal gescannter Code schnell ungültig wird.</p>
-    </div>
-
-    <h2>Kryptografische Absicherung</h2>
-    <div class="box">
-        <p>
-            Jeder Badge wird mit <strong>zwei Schnorr-Signaturen</strong> (BIP-340) gesichert:
-        </p>
-        <ul>
-            <li><strong>Organisator-Signatur</strong> – bestätigt die Echtheit des Meetups</li>
-            <li><strong>Teilnehmer-Signatur</strong> – bindet den Badge an deine private Nostr-Identität</li>
-        </ul>
-        <p>
-            Nur die Kombination beider Signaturen ergibt einen gültigen Badge.
-        </p>
-    </div>
-
-    <h2>Speicherung &amp; Privatsphäre</h2>
-    <div class="box">
-        <p>
-            <strong>Aus Datenschutzgründen werden deine Badges lokal auf deinem Smartphone gespeichert</strong> und nicht öffentlich ins Nostr-Netzwerk gepostet.
-        </p>
-        <p>
-            Das schützt deine Teilnahmehistorie vor unerwünschter Einsehbarkeit. Nur du hast Zugriff auf deine vollständige Badge-Sammlung.
-        </p>
-    </div>
-
-    <h2>Technischer Ablauf</h2>
-    <div class="box">
-        <pre>
-Smartphone → NFC / QR-Scan
-         ↓
-Lokale Prüfung:
-   • Zeitfenster
-   • Standort (lokal ausgewertet)
-   • Event-ID
-         ↓
-Signierung durch Organisator + Teilnehmer (Schnorr)
-         ↓
-Erstellung des Badges
-         ↓
-Sichere lokale Speicherung auf dem Gerät
-        </pre>
-    </div>
-
-
-
-    <h2>Warum der Badge nicht kopierbar ist</h2>
-    <div class="box">
-        <ul>
-            <li><strong>Zeitliche Bindung</strong>: Scan nur während des Events möglich</li>
-            <li><strong>Lokale Standortprüfung</strong>: Die App prüft auf deinem Gerät, ob du dich tatsächlich am Veranstaltungsort befindest</li>
-            <li><strong>Rolling Codes</strong>: QR-Codes verfallen schnell</li>
-            <li><strong>Doppelte Signatur</strong>: Ohne Signatur des Organisators ist der Badge wertlos</li>
-        </ul>
-    </div>
-
-    <h2>Nostr &amp; Dezentralität</h2>
-    <div class="box">
-        <p>
-            Die App nutzt das Nostr-Protokoll für deine Identität und zukünftige Backup-Funktionen.
-            Deine eigentlichen Badges bleiben jedoch privat auf dem Gerät.
-        </p>
-        <ul>
-            <li>Deine Identität ist ein selbstverwaltetes kryptografisches Schlüsselpaar</li>
-            <li>Optional: Höchste Sicherheit mit <strong>Amber</strong> (separater Key-Manager)</li>
-            <li>Dein Trust Score und Web of Trust werden lokal aus den gesammelten Badges berechnet</li>
-        </ul>
-    </div>
-
-    <!-- Backup-Warnung -->
-    <div class="box" style="border: 2px solid var(--accent);">
-        <h2 style="color: var(--accent); margin-top: 0;">⚠️ Wichtig: Regelmäßige Backups!</h2>
-        <p>
-            Da deine Badges lokal auf dem Smartphone gespeichert werden, sind sie nur auf diesem Gerät vorhanden.<br><br>
-            <strong>Geht das Handy verloren oder wird kein Backup erstellt, ist deine komplette digitale Reputation unwiederbringlich verloren.</strong><br><br>
-            Sichere deine App daher regelmäßig – genau wie deine Bitcoin-Wallet.
-        </p>
-    </div>
-
-    <h2>Ziel der Technologie</h2>
-    <div class="box">
-        <ul>
-            <li>Einfache Nutzung ohne zentrale Registrierung</li>
-            <li>Maximale Fälschungssicherheit durch Kombination aus Physischem und Kryptografie</li>
-            <li>Starker Datenschutz durch lokale Speicherung</li>
-            <li>Aufbau eines echten Web of Trust basierend auf realer Anwesenheit</li>
-        </ul>
-    </div>
+<div data-include="components/nav.html"></div>
+<main class="page-shell">
+<!-- ========================================================
+         HERO
+         ======================================================== -->
+<section class="hero hero--technical">
+<div class="hero-copy">
+<div class="eyebrow">Badge-Technik</div>
+<h1>Vom NFC-Scan zum <span>krypto­grafischen Nachweis</span></h1>
+<p class="lead">21Meetup verbindet einen vor Ort erhaltenen Session-Payload mit Schnorr-Signaturen, Claim-Binding, lokaler Speicherung und einem dezentralen Vertrauensmodell.</p>
+</div>
+<figure class="screen-card">
+<img alt="Badge über NFC oder QR scannen" src="pdf-pages/page-07.png"/>
+<figcaption>Der Teilnehmer scannt vor Ort einen NFC-Tag oder Rolling QR-Code.</figcaption>
+</figure>
+</section>
+<!-- ========================================================
+         GESAMTABLAUF
+         ======================================================== -->
+<section class="section" id="ablauf">
+<div class="section-head">
+<div class="eyebrow">Gesamtablauf</div>
+<h2>Vier Schritte vom Meetup zur Badge-Wallet</h2>
+<p>Organisator und Teilnehmer besitzen jeweils ein Nostr-Schlüsselpaar. Der Organisator signiert die Meetup-Daten, der Teilnehmer prüft diese und bindet den Nachweis anschließend mit einer eigenen Claim-Signatur an seine Identität.</p>
+</div>
+<div class="steps grid-2">
+<article class="step-card">
+<h3>Session starten</h3>
+<p>Der Organisator erstellt eine zeitlich begrenzte Meetup-Session. Zu den signierten Daten gehören unter anderem Version, Zeit, Meetup-Kennung, Blockhöhe und eine zusätzliche Session-Kennung.</p>
+</article>
+<article class="step-card">
+<h3>NFC oder Rolling QR bereitstellen</h3>
+<p>Die signierten Meetup-Daten werden als kompakter NFC-Payload oder als rotierender QR-Code bereitgestellt.</p>
+</article>
+<article class="step-card">
+<h3>Signatur und Gültigkeit prüfen</h3>
+<p>Das Smartphone des Teilnehmers prüft den Payload, die Schnorr-Signatur, das Zeitfenster und die zur Session gehörenden Daten.</p>
+</article>
+<article class="step-card">
+<h3>Badge an den Teilnehmer binden</h3>
+<p>Der Teilnehmer erzeugt eine eigene Claim-Signatur. Erst diese zweite Signatur bindet den Badge an genau dieses Nostr-Schlüsselpaar.</p>
+</article>
+</div>
+<pre class="flow">ORGANISATOR
+Nostr-Keypair
+    ↓
+Meetup-Daten signieren
+    ↓
+NFC-Payload oder Rolling QR
+    ↓ Scan
+TEILNEHMER
+Organisator-Signatur prüfen
+    ↓
+Claim mit eigenem Nostr-Key signieren
+    ↓
+Badge mit zwei Signaturen lokal speichern</pre>
+</section>
+<!-- ========================================================
+         NFC
+         ======================================================== -->
+<section class="section" id="nfc">
+<div class="section-head">
+<div class="eyebrow">Physischer Trigger</div>
+<h2>NFC: kompakt, passiv und nur aus kurzer Distanz lesbar</h2>
+<p>Der Organisator kann einen kompatiblen NFC-Tag mit einem kompakten, signierten Payload beschreiben. Der Tag benötigt keine eigene Stromversorgung und wird vom Smartphone nur aus unmittelbarer Nähe ausgelesen.</p>
+</div>
+<div class="grid-2">
+<article class="info-card">
+<h3>Was auf dem Tag liegt</h3>
+<ul>
+<li>signierte Meetup- und Sessiondaten</li>
+<li>öffentlicher Schlüssel des Organisators</li>
+<li>kryptografische Signatur</li>
+<li>keine private Schlüsseldatei und keine Teilnehmerdaten</li>
+</ul>
+</article>
+<article class="info-card">
+<h3>Warum NFC sinnvoll ist</h3>
+<ul>
+<li>sehr kurze Reichweite</li>
+<li>kein Akku im Tag erforderlich</li>
+<li>einfaches Scannen durch Auflegen des Smartphones</li>
+<li>physischer Kontakt zum Veranstaltungsort</li>
+</ul>
+</article>
+</div>
+<figure class="screen-card">
+<img alt="NFC-Tag für eine Meetup-Session beschreiben" src="pdf-pages/page-08.png"/>
+<figcaption>Der Organisator beschreibt den NFC-Tag für die laufende Session.</figcaption>
+</figure>
+</section>
+<!-- ========================================================
+         ROLLING QR
+         ======================================================== -->
+<section class="section" id="rolling-qr">
+<div class="section-head">
+<div class="eyebrow">Anti-Replay</div>
+<h2>Rolling QR: ständig wechselnde Nonce statt statischem Screenshot</h2>
+<p>Der QR-Code basiert auf einem signierten Grund-Payload und einer sich regelmäßig ändernden Nonce. Dadurch ist ein alter Screenshot nach kurzer Zeit nicht mehr gültig.</p>
+</div>
+<div class="grid-3">
+<article class="feature-card">
+<h3>Sicherer Session-Seed</h3>
+<p>Für die Session wird ein kryptografisch sicherer Zufallswert erzeugt und geschützt gespeichert.</p>
+</article>
+<article class="feature-card">
+<h3>Rotierende Nonce</h3>
+<p>Der QR-Code wird in kurzen Abständen neu erzeugt. Die App akzeptiert nur Nonces aus dem gültigen Zeitfenster.</p>
+</article>
+<article class="feature-card">
+<h3>Identischer Badge</h3>
+<p>NFC und Rolling QR führen nach erfolgreicher Prüfung zum gleichen Badge-Modell und derselben Beweiskette.</p>
+</article>
+</div>
+<figure class="screen-card">
+<img alt="Rolling QR Session in der 21Meetup App" src="pdf-pages/page-09.png"/>
+<figcaption>Live-Session mit NFC- und Rolling-QR-Werkzeugen.</figcaption>
+</figure>
+</section>
+<!-- ========================================================
+         SCHNORR UND CLAIM-BINDING
+         ======================================================== -->
+<section class="section" id="signaturen">
+<div class="section-head">
+<div class="eyebrow">BIP-340 Schnorr</div>
+<h2>Zwei Signaturen mit unterschiedlichen Aufgaben</h2>
+<p>Die Organisator-Signatur bestätigt, dass der Session-Payload mit dem zugehörigen Organisator-Schlüssel signiert wurde. Die Claim-Signatur des Teilnehmers verhindert, dass ein fremder Badge einfach kopiert und der eigenen Reputation zugerechnet wird.</p>
+</div>
+<div class="grid-2">
+<article class="feature-card">
+<h3>1. Organisator-Signatur</h3>
+<p>Der Organisator signiert den kanonisch aufgebauten Inhalt der Meetup-Session mit seinem Nostr-Schlüssel. Der Teilnehmer kann die Signatur mit dem öffentlichen Schlüssel prüfen.</p>
+</article>
+<article class="feature-card nostr-card">
+<h3>2. Claim-Signatur</h3>
+<p>Der Teilnehmer signiert den Claim mit seinem eigenen Nostr-Schlüssel. Dadurch wird der Badge an genau diesen Sammler gebunden.</p>
+</article>
+</div>
+<article class="callout">
+<strong>Claim-Binding:</strong> Ein gültiger Organisator-Payload allein reicht nicht für die persönliche Reputation. Erst der gebundene Claim erzeugt den vollständigen Nachweis aus „Meetup fand statt“ und „dieses Schlüsselpaar hat den Badge beansprucht“.
+      </article>
+<figure class="screen-card">
+<img alt="Kryptografische Absicherung und Speicherung" src="pdf-pages/page-25.png"/>
+<figcaption>Organisator-Signatur, Teilnehmer-Claim und lokale Speicherung.</figcaption>
+</figure>
+</section>
+<!-- ========================================================
+         VALIDIERUNG UND DATENMODELL
+         ======================================================== -->
+<section class="section" id="validierung">
+<div class="section-head">
+<div class="eyebrow">Defensive Verifikation</div>
+<h2>Nur erwartete Felder und gültige Formate werden akzeptiert</h2>
+<p>Vor der Signaturprüfung wird der relevante Inhalt kanonisiert und defensiv validiert. Unbekannte Felder werden bei dieser Prüfung ignoriert und dürfen deshalb nicht als kryptografisch bestätigt behandelt werden.</p>
+</div>
+<div class="grid-3">
+<article class="feature-card">
+<h3>Whitelist statt Blacklist</h3>
+<p>Nur die definierten Content-Felder <code>v</code>, <code>t</code>, <code>m</code>, <code>b</code> und <code>x</code> werden für die Verifikation berücksichtigt.</p>
+<p class="technical-note"><sup>*</sup> Diese Kürzel stehen für Version, Zeitstempel, Meetup, Bitcoin-Blockhöhe und einen zusätzlichen Sitzungswert. Weitere Felder können zwar im übertragenen Datensatz stehen, gelten bei dieser Prüfung aber nicht automatisch als signiert oder bestätigt.</p>
+</article>
+<article class="feature-card">
+<h3>Kanonisches JSON</h3>
+<p>Alphabetisch sortierte Schlüssel sorgen dafür, dass aus denselben Daten derselbe deterministische JSON-Inhalt entsteht.</p>
+</article>
+<article class="feature-card">
+<h3>Längenprüfung</h3>
+<p>Öffentliche Schlüssel werden auf 64 Hex-Zeichen und Signaturen auf 128 Hex-Zeichen geprüft, bevor die kryptografische Verifikation beginnt.</p>
+</article>
+</div>
+</section>
+<!-- ========================================================
+         BADGE-WALLET UND PRIVATSPHÄRE
+         ======================================================== -->
+<section class="section" id="wallet">
+<div class="section-head">
+<div class="eyebrow">Badge-Wallet</div>
+<h2>Die vollständige Sammlung bleibt lokal</h2>
+<p>Die Badge-Wallet zeigt Meetup, Datum, Blockhöhe und Verifikationsstatus. Die vollständige Teilnahmehistorie wird nicht als öffentliche Liste auf Nostr veröffentlicht.</p>
+</div>
+<div class="stats">
+<div class="metric"><strong>Schnorr</strong><span>Signatur</span></div>
+<div class="metric"><strong>Claim</strong><span>Bindung</span></div>
+<div class="metric"><strong>Block</strong><span>Zeitanker</span></div>
+<div class="metric"><strong>Lokal</strong><span>Speicherung</span></div>
+</div>
+<div class="grid-2">
+<figure class="screen-card">
+<img alt="Badge-Detail mit Blockhöhe und Verifikationshash" src="pdf-pages/page-05.png"/>
+<figcaption>Einzelner Badge mit kryptografischen Details.</figcaption>
+</figure>
+<figure class="screen-card">
+<img alt="Badge-Wallet mit mehreren Badges" src="pdf-pages/page-06.png"/>
+<figcaption>Gesammelte und überprüfbare Badges in der Wallet.</figcaption>
+</figure>
+</div>
+</section>
+<!-- ========================================================
+         REPUTATION
+         ======================================================== -->
+<section class="section" id="reputation">
+<div class="section-head">
+<div class="eyebrow">Reputation</div>
+<h2>Ein Score aus Vielfalt, Qualität, Reife und Aktivität</h2>
+<p>Der Trust Score soll nicht bloß die Anzahl der Badges zählen. Er berücksichtigt Vielfalt, Qualität, Reife und Aktivität. Dahinter steht ein Cost-Prinzip: Anreise, Entfernung, Zeit und wiederholte persönliche Teilnahme machen Badges aufwendig und erschweren künstlich erzeugte Reputation.</p>
+</div>
+<div class="grid-2">
+<article class="feature-card">
+<h3>Diversity</h3>
+<p>Verschiedene Meetups, Städte und Organisatoren erhöhen die Aussagekraft des Netzwerks.</p>
+</article>
+<article class="feature-card">
+<h3>Quality</h3>
+<p>Badges aus besser belegten Meetups mit mehreren verifizierten Teilnehmern erhalten mehr Gewicht.</p>
+</article>
+<article class="feature-card">
+<h3>Maturity</h3>
+<p>Account-Alter und kontinuierliche Teilnahme bilden langfristiges Engagement ab.</p>
+</article>
+<article class="feature-card">
+<h3>Activity und Verfall</h3>
+<p>Regelmäßigkeit zählt, wird aber begrenzt. Das Gewicht älterer oder lange nicht ergänzter Aktivität kann mit der Zeit abnehmen, sodass Reputation erhalten werden muss.</p>
+</article>
+</div>
+<article class="callout">
+<strong>Sybil- und KI-Resistenz:</strong> Ein Bot oder KI-Profil kann Schlüssel und Online-Inhalte erzeugen, aber nicht selbst zu Meetups anreisen. Das System macht deshalb reale Anwesenheit zu einer knappen Ressource, ohne daraus eine Garantie über Identität oder Vertrauenswürdigkeit abzuleiten.
+      </article>
+<div class="grid-2">
+<figure class="screen-card">
+<img alt="Wie digitale Reputation entsteht" src="pdf-pages/page-13.png"/>
+<figcaption>Reputation basiert auf nachvollziehbarem Aufwand.</figcaption>
+</figure>
+<figure class="screen-card">
+<img alt="Trust Score und Reputation QR" src="pdf-pages/page-14.png"/>
+<figcaption>Aggregierter Trust Score als teilbarer QR-Nachweis.</figcaption>
+</figure>
+</div>
+</section>
+<!-- ========================================================
+         WEB OF TRUST UND ADMIN-MODELL
+         ======================================================== -->
+<section class="section" id="web-of-trust">
+<div class="section-head">
+<div class="eyebrow eyebrow-nostr">Web of Trust</div>
+<h2>Organisatoren durch Reputation und gegenseitiges Bürgen</h2>
+<p>Das Admin-Modell soll ohne dauerhafte zentrale Ernennung auskommen. Organisatoren können füreinander bürgen; Warnungen werden gewichtet und erhalten erst durch mehrere unabhängige Stimmen Wirkung.</p>
+</div>
+<div class="grid-3">
+<article class="feature-card nostr-card">
+<h3>Vouching</h3>
+<p>Signierte Bürgschaften werden über Nostr veröffentlicht und können widerrufen werden.</p>
+</article>
+<article class="feature-card nostr-card">
+<h3>Distrust-Meldungen</h3>
+<p>Eine einzelne Warnung ist zunächst nur ein Signal. Mehrere unabhängige Meldungen können zum Downgrade führen.</p>
+</article>
+<article class="feature-card">
+<h3>Bootstrap-Phasen</h3>
+<p>Mit wachsendem Netzwerk steigen die Anforderungen an Badges, Meetups, Signer und Account-Alter.</p>
+</article>
+</div>
+<div class="grid-2">
+<figure class="screen-card">
+<img alt="Web of Trust mit Bürgschaften und Meldesystem" src="pdf-pages/page-10.png"/>
+<figcaption>Vouching, gewichtete Meldungen und Sybil-Resistenz.</figcaption>
+</figure>
+<figure class="screen-card">
+<img alt="Vernetzungsgraph der 21Meetup App" src="pdf-pages/page-12.png"/>
+<figcaption>Direkte und indirekte Verbindungen im Vertrauensnetzwerk.</figcaption>
+</figure>
+</div>
+</section>
+<!-- ========================================================
+         NOSTR UND REPUTATION TEILEN
+         ======================================================== -->
+<section class="section" id="nostr">
+<div class="section-head">
+<div class="eyebrow eyebrow-nostr">Nostr</div>
+<h2>Aggregierte Reputation statt öffentlicher Besuchsliste</h2>
+<p>Die App kann aggregierte Reputationsdaten auf konfigurierbaren Relays veröffentlichen. Dabei werden keine vollständigen Meetup-Namen oder Besuchsdaten benötigt.</p>
+</div>
+<div class="grid-2">
+<article class="feature-card nostr-card">
+<h3>Reputations-QR</h3>
+<p>Der QR enthält aggregierte Kennzahlen und einen kryptografischen Proof-Hash, aber keine komplette private Teilnahmehistorie.</p>
+</article>
+<article class="feature-card nostr-card">
+<h3>Relay-Publishing</h3>
+<p>Aggregierte Reputation kann als ersetzbares Nostr-Event veröffentlicht und von anderen geprüft werden.</p>
+</article>
+</div>
+</section>
+<!-- ========================================================
+         SCHLÜSSEL, BACKUP UND GERÄTESICHERHEIT
+         ======================================================== -->
+<section class="section" id="sicherheit">
+<div class="section-head">
+<div class="eyebrow">Schlüssel und Backup</div>
+<h2>Private Schlüssel bleiben im geschützten Gerätespeicher</h2>
+<p>Die Android-App nutzt den geschützten Schlüsselspeicher des Betriebssystems. Backups werden verschlüsselt; zusätzliche Geräteprüfungen können auf typische Anzeichen eines kompromittierten Systems hinweisen.</p>
+</div>
+<div class="grid-3">
+<article class="feature-card">
+<h3>Secure Storage</h3>
+<p>Private Schlüssel werden über den Android Keystore geschützt und nur für kryptografische Signaturen verwendet.</p>
+</article>
+<article class="feature-card">
+<h3>Verschlüsseltes Backup</h3>
+<p>Backups werden mit AES-256 verschlüsselt; der Schlüssel wird per PBKDF2 aus dem Nutzerpasswort abgeleitet.</p>
+</article>
+<article class="feature-card">
+<h3>Geräteintegrität</h3>
+<p>Die Android-App prüft beim Start auf typische Root-Indikatoren wie <code>su</code>-Dateien, Magisk oder auffällige Build-Tags. Bei einem Verdacht erscheint eine Warnung; das Gerät wird nicht automatisch gesperrt.</p>
+<p class="technical-note"><sup>*</sup> Diese Prüfung ist eine zusätzliche Warnschicht und kein sicherer Beweis dafür, dass ein Gerät unverändert oder kompromittiert ist. Entscheidend bleiben die Signaturprüfung und der geschützte Schlüsselspeicher.</p>
+</article>
+</div>
+<article class="callout warning">
+<strong>Wichtig:</strong> Da die vollständige Badge-Sammlung lokal gespeichert wird, sollte regelmäßig ein verschlüsseltes Backup erstellt und sicher verwahrt werden.
+      </article>
+<figure class="screen-card">
+<img alt="Hinweis zu regelmäßigen Backups" src="pdf-pages/page-27.png"/>
+<figcaption>Selbstverwahrung bedeutet auch Verantwortung für das Backup.</figcaption>
+</figure>
+</section>
+<!-- ========================================================
+         SEITENNAVIGATION
+         ======================================================== -->
+<nav aria-label="Seitennavigation" class="page-progress">
+<a class="btn btn-secondary" href="index.html"><span aria-hidden="true">←</span> Zurück zur Idee</a>
+<a class="btn btn-primary page-progress-next" href="funktionen.html">Weiter zu den Funktionen <span aria-hidden="true">→</span></a>
+</nav>
 </main>
-
 <div data-include="components/footer.html"></div>
-<script src="js/hover.js" defer></script>
+<script src="js/config.js"></script>
 <script src="js/theme.js"></script>
 <script src="js/include.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/footer.js"></script>
+<script src="js/hover.js"></script>
+<script src="js/scroll-top.js"></script>
 </body>
 </html>

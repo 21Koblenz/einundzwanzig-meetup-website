@@ -1,0 +1,82 @@
+/* ============================================================
+   BASIS UND TYPOGRAFIE
+   ============================================================ */
+* { box-sizing: border-box; }
+
+/* Verhindert, dass einzelne Grid-Inhalte die Seite verbreitern. */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+main, section, article, figure, div { min-width: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 95px;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(247, 147, 26, 0.12), transparent 24rem),
+    var(--bg);
+  color: var(--text);
+  font-family: "Courier New", ui-monospace, monospace;
+  line-height: 1.65;
+}
+
+a { color: inherit; }
+
+img, svg, video, canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button, a { -webkit-tap-highlight-color: transparent; }
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--orange);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.33em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 34px;
+  height: 5px;
+  background: var(--orange);
+  border-radius: 99px;
+}
+
+.lead {
+  max-width: 760px;
+  color: var(--muted);
+  font-size: clamp(1rem, 2vw, 1.24rem);
+}
+
+/* Native Browser-Abstände von Medien entfernen. Sie waren auf kleinen
+   Displays die häufigste Ursache für nach rechts verschobene Bilder. */
+figure,
+picture {
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  max-width: 100%;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}

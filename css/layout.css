@@ -1,0 +1,120 @@
+/* ============================================================
+   SEITENLAYOUT UND ABSCHNITTE
+   ============================================================ */
+.page-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: auto;
+}
+
+.hero {
+  min-height: calc(100vh - 70px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  align-items: center;
+  gap: 48px;
+  padding: 72px 0;
+}
+
+.hero h1,
+.section-head h2 {
+  margin: 0.35em 0;
+  font-family: "Arial Black", sans-serif;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
+.hero h1 { font-size: clamp(3.2rem, 8vw, 7.4rem); }
+.hero h1 span { color: var(--orange); }
+
+/* Technik-Hero: lange Überschrift ohne Überlagerung des Bildes.
+   min-width: 0 erlaubt der Textspalte, innerhalb des Grids sauber zu schrumpfen. */
+.hero--technical .hero-copy {
+  min-width: 0;
+}
+
+.hero--technical h1 {
+  max-width: 11ch;
+  font-size: clamp(3rem, 6.2vw, 6.1rem);
+  hyphens: manual;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.hero--technical h1 span {
+  display: block;
+}
+
+.hero--technical .screen-card {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.section {
+  padding: 84px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section-head {
+  max-width: 860px;
+  margin-bottom: 34px;
+}
+
+.section-head h2 { font-size: clamp(2.4rem, 6vw, 5rem); }
+.section-head p { color: var(--muted); }
+
+.grid-2, .grid-3, .stats, .steps {
+  display: grid;
+  gap: 18px;
+}
+
+.grid-2, .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.page-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+/* ============================================================
+   EINHEITLICHES ABSTANDSSYSTEM
+
+   Abschnitte verwalten die vertikalen Abstände ihrer direkten
+   Inhalte. Karten selbst erhalten keinen Außenabstand. Dadurch
+   können Karten auf keiner Bildschirmgröße aneinanderkleben.
+   ============================================================ */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-content-gap, 32px);
+}
+
+.section-head {
+  margin-bottom: 0;
+}
+
+.grid-2,
+.grid-3,
+.stats,
+.steps,
+.page-gallery {
+  gap: var(--card-gap, 24px);
+  margin: 0;
+}
+
+/* Auch einzelne Karten und Abbildungen bleiben sauber getrennt. */
+.section > .feature-card,
+.section > .info-card,
+.section > .step-card,
+.section > .screen-card,
+.section > .callout {
+  margin: 0;
+}
+
+/* Die Weiter-Navigation erhält Abstand zum letzten Abschnitt,
+   unabhängig davon, wie dessen Inhalt aufgebaut ist. */
+.page-progress {
+  margin-top: 32px;
+}

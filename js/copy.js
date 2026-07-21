@@ -1,49 +1,39 @@
-function copyNpub() {
+/**
+ * Kopiert Texte aus einem Element mit data-copy-target in die Zwischenablage.
+ */
+document.addEventListener("click", async (event) => {
+  const button = event.target.closest("[data-copy-target]");
+  if (!button) return;
 
-    const npub = document.getElementById("nostrKey").innerText.trim();
+  const targetId = button.dataset.copyTarget;
+  const target = document.getElementById(targetId);
+  const text = target?.textContent.trim();
 
-    if (navigator.clipboard) {
+  if (!text) return;
 
-        navigator.clipboard.writeText(npub)
-        .then(() => showCopied())
-        .catch(() => fallbackCopy(npub));
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    copyWithFallback(text);
+  }
 
-    } else {
+  showCopyConfirmation(button);
+});
 
-        fallbackCopy(npub);
-
-    }
-
+function copyWithFallback(text) {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  document.body.append(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
 }
 
+function showCopyConfirmation(button) {
+  const originalLabel = button.textContent;
+  button.textContent = "Kopiert ✓";
 
-function fallbackCopy(text) {
-
-    const textarea = document.createElement("textarea");
-
-    textarea.value = text;
-
-    document.body.appendChild(textarea);
-
-    textarea.select();
-
-    document.execCommand("copy");
-
-    textarea.remove();
-
-    showCopied();
-
-}
-
-
-function showCopied() {
-
-    const button = document.querySelector(".copy-button");
-
-    button.innerHTML = "✅ Kopiert";
-
-    setTimeout(() => {
-        button.innerHTML = "📋 Kopieren";
-    }, 2000);
-
+  window.setTimeout(() => {
+    button.textContent = originalLabel;
+  }, 1800);
 }

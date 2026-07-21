@@ -1,0 +1,110 @@
+/* ============================================================
+   FOOTER – IMMER DUNKEL
+   ============================================================ */
+.site-footer {
+  padding: 64px 20px 72px;
+  border-top: 1px solid rgba(247, 147, 26, 0.28);
+  background:
+    radial-gradient(circle at 50% 5%, rgba(247, 147, 26, 0.16), transparent 24rem),
+    #050505 !important;
+  color: #fff !important;
+  text-align: center;
+}
+
+.footer-update {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 34px;
+  padding: 9px 14px;
+  border: 1px solid rgba(247, 147, 26, 0.38);
+  border-radius: 999px;
+  background: rgba(247, 147, 26, 0.07);
+  color: #8e8e8e;
+  font-size: 0.82rem;
+}
+
+.footer-block-link {
+  color: var(--orange);
+  text-decoration: none;
+}
+.footer-block-link:hover { text-shadow: 0 0 14px rgba(247, 147, 26, 0.72); }
+
+.footer-banner {
+  display: block;
+  width: min(600px, 86vw);
+  margin: 0 auto 24px;
+}
+.footer-banner-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 18px rgba(247, 147, 26, 0.28));
+}
+
+.footer-tagline {
+  margin: 0 auto 24px;
+  color: #fff !important;
+  font-size: clamp(0.9rem, 2vw, 1.08rem);
+  letter-spacing: 0.04em;
+}
+.footer-tagline strong { color: var(--orange) !important; }
+.footer-tagline span { color: #fff !important; }
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 20px;
+}
+.footer-links a { color: #a8a8a8 !important; }
+.footer-links a:hover, .footer-main-links a { color: var(--orange) !important; }
+.footer-main-links a { font-weight: 900; text-decoration: none; }
+
+.footer-theme-toggle {
+  display: grid;
+  place-items: center;
+  margin: 24px auto 0;
+  border-color: rgba(247, 147, 26, 0.48) !important;
+  background: #111 !important;
+  color: var(--orange) !important;
+}
+.footer-theme-toggle:hover {
+  background: rgba(247, 147, 26, 0.13) !important;
+  box-shadow: 0 0 24px rgba(247, 147, 26, 0.24);
+}
+.footer-small { color: #737373 !important; font-size: 0.78rem; }
+
+/* ============================================================
+   VALUE FOR VALUE
+   Die Lightning-Adressen stehen bewusst im gemeinsamen Footer,
+   damit sie auf jeder Unterseite erreichbar sind.
+   ============================================================ */
+.footer-v4v {
+  margin: 1.4rem auto 0;
+  text-align: center;
+}
+
+.footer-v4v p {
+  margin: 0 0 0.65rem;
+}
+
+.footer-v4v-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem 1rem;
+}
+
+.footer-v4v-links a {
+  color: var(--accent);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .footer-v4v-links {
+    flex-direction: column;
+    align-items: center;
+  }
+}

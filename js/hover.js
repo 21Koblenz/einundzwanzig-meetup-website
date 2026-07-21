@@ -1,33 +1,59 @@
-// script.js
-document.addEventListener('DOMContentLoaded', () => {
+/**
+ * Simuliert den Karten-Hover auf Geräten ohne echte Maus.
+ * Der Glow wird aktiviert, sobald die Kartenmitte nahe der Bildschirmmitte liegt.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+  const touchLikeDevice = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+  if (!touchLikeDevice) return;
 
-    const elements = document.querySelectorAll('.card, .box, .btn, .button');
+  const cards = [...document.querySelectorAll(
+    ".feature-card, .info-card, .step-card, .screen-card, .metric, .callout, .social-link"
+  )];
 
-    if (elements.length === 0) return;
+  if (!cards.length) return;
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+  let activeCard = null;
+  let ticking = false;
 
-            const el = entry.target;
-            const ratio = entry.intersectionRatio;
+  const updateFocusedCard = () => {
+    const viewportCenter = window.innerHeight / 2;
+    let closestCard = null;
+    let closestDistance = Number.POSITIVE_INFINITY;
 
-            // Hysterese:
-            // Start bei 60%
-            if (ratio >= 0.52) {
-                el.classList.add('in-view');
-            }
+    cards.forEach((card) => {
+      const rect = card.getBoundingClientRect();
+      const visible = rect.bottom > 0 && rect.top < window.innerHeight;
+      if (!visible) return;
 
-            // Entfernen erst bei 30%
-            else if (ratio <= 0.48) {
-                el.classList.remove('in-view');
-            }
+      const cardCenter = rect.top + rect.height / 2;
+      const distance = Math.abs(cardCenter - viewportCenter);
 
-        });
-
-    }, {
-        threshold: [0.3, 0.6],
-        rootMargin: '-10px 0px -10px 0px'
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestCard = card;
+      }
     });
 
-    elements.forEach(el => observer.observe(el));
+    const focusRange = Math.max(150, window.innerHeight * 0.34);
+    const nextCard = closestDistance <= focusRange ? closestCard : null;
+
+    if (activeCard !== nextCard) {
+      activeCard?.classList.remove("in-view");
+      nextCard?.classList.add("in-view");
+      activeCard = nextCard;
+    }
+
+    ticking = false;
+  };
+
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(updateFocusedCard);
+  };
+
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("orientationchange", requestUpdate);
+  requestUpdate();
 });

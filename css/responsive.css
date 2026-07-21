@@ -1,0 +1,312 @@
+/* ============================================================
+   RESPONSIVE ANPASSUNGEN
+   ============================================================ */
+@media (max-width: 1050px) {
+  .brand-banner { max-width: 235px; }
+}
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-logo { max-width: 520px; margin: auto; }
+  .grid-3, .grid-2, .social-list, .social-grid { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .page-gallery { grid-template-columns: repeat(3, 1fr); }
+
+  .brand-banner { max-width: 220px; }
+  .menu-toggle { display: block; }
+  .header-controls { margin-left: auto; }
+
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 68px;
+    right: 16px;
+    left: 16px;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--panel);
+    box-shadow: var(--shadow);
+  }
+  .main-nav.open { display: flex; }
+  .nav-primary { display: grid; grid-template-columns: 1fr; width: 100%; }
+  .nav-primary .page-link { text-align: center; }
+  .nav-group { display: block; width: 100%; }
+  .nav-group summary { text-align: center; border: 1px solid var(--line); border-radius: 10px; }
+  .nav-dropdown { position: static; margin-top: 8px; box-shadow: none; }
+  .social-featured { grid-column: auto; }
+}
+
+@media (max-width: 600px) {
+  .brand-banner { min-width: 0; width: 185px; }
+  .site-header { gap: 10px; }
+  .header-theme-toggle, .menu-toggle { width: 36px; height: 36px; }
+  .page-gallery { grid-template-columns: repeat(2, 1fr); }
+  .social-link { grid-template-columns: auto 1fr; }
+  .social-arrow { display: none; }
+  .card-actions { flex-direction: column; }
+  .card-actions .btn { width: 100%; }
+  .mini-link { flex-direction: column; }
+  .mini-link span { text-align: left; }
+  .identity-image { max-width: 260px; }
+  .project-banner-shell { min-height: 170px; padding: 24px 16px; }
+  .footer-update { flex-direction: column; gap: 2px; border-radius: 16px; }
+}
+
+
+/* ============================================================
+   SMARTPHONE: ECHTES EINSPALTIGES LAYOUT OHNE SEITENSCROLLEN
+   ============================================================ */
+@media (max-width: 700px) {
+  .page-shell {
+    width: min(100% - 24px, 1180px);
+  }
+
+  .hero {
+    width: 100%;
+    padding: 48px 0 58px;
+    gap: 32px;
+  }
+
+  .section {
+    width: 100%;
+    padding: 58px 0;
+  }
+
+  .grid-2,
+  .grid-3,
+  .stats,
+  .steps,
+  .social-list,
+  .social-grid,
+  .page-gallery {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100%;
+  }
+
+  .feature-card,
+  .info-card,
+  .step-card,
+  .screen-card,
+  .metric,
+  .callout {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .feature-card,
+  .info-card,
+  .step-card,
+  .callout {
+    padding: 19px;
+  }
+
+  .stats { gap: 12px; }
+  .metric { padding: 18px 14px; }
+  .metric strong { font-size: 1.8rem; }
+
+  .hero-actions,
+  .card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-actions .btn,
+  .card-actions .btn { width: 100%; }
+
+  .flow {
+    padding: 16px;
+    font-size: 0.82rem;
+  }
+
+  .qr-shell {
+    width: min(260px, 100%);
+    padding: 14px;
+  }
+
+  .hero-logo {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .hero-logo::after {
+    max-width: calc(100% - 24px);
+    white-space: nowrap;
+    letter-spacing: 0.14em;
+  }
+}
+
+@media (max-width: 380px) {
+  .page-shell { width: min(100% - 16px, 1180px); }
+  .feature-card, .info-card, .step-card, .callout { padding: 16px; }
+  .brand-banner { width: 155px; }
+}
+
+/* ============================================================
+   MOBILE MEDIEN: VOLLE BREITE, KEIN ABSCHNEIDEN
+   ============================================================ */
+@media (max-width: 700px) {
+  .page-shell {
+    width: calc(100% - 24px);
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .screen-card,
+  .screen-card img,
+  figure.screen-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+    transform: none;
+  }
+
+  .screen-card:hover,
+  .screen-card.in-view {
+    transform: translateY(-4px);
+  }
+
+  .grid-2,
+  .grid-3,
+  .stats,
+  .steps {
+    align-items: stretch;
+  }
+
+  .hero .screen-card,
+  .hero-logo {
+    justify-self: stretch;
+  }
+}
+
+
+/* ============================================================
+   SEITENWEITERLEITUNG AUF SMARTPHONES UND TABLETS
+   ============================================================ */
+@media (max-width: 700px) {
+  .page-progress {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 18px;
+    margin-bottom: 54px;
+  }
+
+  .page-progress-label {
+    text-align: center;
+  }
+
+  .page-progress .btn,
+  .page-progress-next {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .scroll-top {
+    width: 44px;
+    height: 44px;
+    right: 14px;
+    bottom: 14px;
+  }
+}
+
+/* Auf Geräten ohne Maus wird nur die fokussierte Karte angehoben. */
+@media (hover: none), (pointer: coarse) {
+  .feature-card:hover,
+  .info-card:hover,
+  .step-card:hover,
+  .screen-card:hover,
+  .metric:hover,
+  .callout:hover,
+  .social-link:hover {
+    transform: none;
+  }
+
+  .feature-card.in-view,
+  .info-card.in-view,
+  .step-card.in-view,
+  .screen-card.in-view,
+  .metric.in-view,
+  .callout.in-view,
+  .social-link.in-view {
+    transform: translateY(-7px);
+    border-color: rgba(247, 147, 26, 0.8);
+    box-shadow: var(--shadow), 0 0 38px rgba(247, 147, 26, 0.36);
+  }
+
+  .nostr-card.in-view {
+    border-color: rgba(143, 61, 255, 0.86);
+    box-shadow: var(--shadow), var(--nostr-glow);
+  }
+}
+
+/* ============================================================
+   EINHEITLICHE ABSTÄNDE AUF TABLETS UND SMARTPHONES
+   ============================================================ */
+@media (max-width: 900px) {
+  .section {
+    --section-content-gap: 26px;
+    --card-gap: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .section {
+    --section-content-gap: 22px;
+    --card-gap: 18px;
+  }
+
+  .grid-2,
+  .grid-3,
+  .stats,
+  .steps,
+  .page-gallery,
+  .social-list,
+  .social-grid {
+    row-gap: 18px !important;
+    column-gap: 18px !important;
+  }
+
+  .screen-card figcaption {
+    min-height: 0;
+  }
+
+  .page-progress {
+    margin-top: 24px;
+  }
+}
+
+/* Technik-Hero auf kleineren Displays: Text und Bild stehen sicher untereinander. */
+@media (max-width: 900px) {
+  .hero--technical h1 {
+    max-width: 14ch;
+    font-size: clamp(2.8rem, 10vw, 5rem);
+  }
+}
+
+@media (max-width: 520px) {
+  .hero--technical h1 {
+    max-width: 100%;
+    font-size: clamp(2.45rem, 12vw, 3.6rem);
+  }
+}
+
+/* ============================================================
+   MOBILE NAVIGATION: DEUTLICHER DROPDOWN-HINWEIS
+   ============================================================ */
+@media (max-width: 900px) {
+  .nav-group summary {
+    position: relative;
+    justify-content: center;
+    min-height: 44px;
+    padding-right: 44px;
+    padding-left: 44px;
+  }
+
+  .nav-group summary::after {
+    position: absolute;
+    right: 18px;
+  }
+}

@@ -1,53 +1,45 @@
+/**
+ * Dark-/Light-Mode.
+ * Das Theme wird gespeichert und alle themeabhängigen Bilddateien
+ * werden mit nur einem sichtbaren <img> ausgetauscht. Dadurch kann
+ * der Lightning-QR-Code niemals doppelt übereinander erscheinen.
+ */
 document.addEventListener("DOMContentLoaded", () => {
+  const root = document.documentElement;
+  const storedTheme = localStorage.getItem("theme");
+  const initialTheme = storedTheme === "light" ? "light" : "dark";
 
-    const icons = document.querySelectorAll(".theme-icon");
+  applyTheme(initialTheme);
 
-    // gespeichertes Theme laden
-    if (localStorage.getItem("theme") === "light") {
-        document.body.classList.add("light-mode");
+  document.addEventListener("click", (event) => {
+    const toggle = event.target.closest(".theme-toggle");
+    if (!toggle) return;
 
-        icons.forEach(icon => {
-            icon.textContent = "☀️";
-        });
+    const nextTheme = root.dataset.theme === "light" ? "dark" : "light";
+    localStorage.setItem("theme", nextTheme);
+    applyTheme(nextTheme);
+  });
 
-    } else {
+  function applyTheme(theme) {
+    root.dataset.theme = theme;
 
-        icons.forEach(icon => {
-            icon.textContent = "🌙";
-        });
-
-    }
-
-
-    // Theme Button
-    document.addEventListener("click", (e) => {
-
-        if (e.target.closest(".theme-toggle")) {
-
-            document.body.classList.toggle("light-mode");
-
-            const isLight = document.body.classList.contains("light-mode");
-
-            if (isLight) {
-
-                localStorage.setItem("theme", "light");
-
-                document.querySelectorAll(".theme-icon").forEach(icon => {
-                    icon.textContent = "☀️";
-                });
-
-            } else {
-
-                localStorage.setItem("theme", "dark");
-
-                document.querySelectorAll(".theme-icon").forEach(icon => {
-                    icon.textContent = "🌙";
-                });
-
-            }
-
-        }
-
+    document.querySelectorAll(".theme-icon").forEach((icon) => {
+      icon.textContent = theme === "light" ? "☀" : "☾";
     });
 
+    document.querySelectorAll(".theme-qr-asset").forEach((image) => {
+      const source = theme === "light"
+        ? image.dataset.lightSrc
+        : image.dataset.darkSrc;
+
+      if (source && image.getAttribute("src") !== source) {
+        image.setAttribute("src", source);
+      }
+    });
+  }
+
+  /* Nach dynamisch geladenen Komponenten erneut anwenden. */
+  document.addEventListener("components:loaded", () => {
+    applyTheme(root.dataset.theme || initialTheme);
+  });
 });

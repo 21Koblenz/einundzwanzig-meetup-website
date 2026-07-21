@@ -1,24 +1,48 @@
-<nav>
-<div class="nav-container">
+<!-- ============================================================
+     GEMEINSAME HAUPTNAVIGATION
+     ============================================================ -->
+<header class="site-header">
+  <a class="brand brand-banner" href="index.html" aria-label="21Meetup Startseite">
+    <img class="banner-logo banner-logo-dark" src="assets/banner-dark.svg" alt="Einundzwanzig im Dark Mode">
+    <img class="banner-logo banner-logo-light" src="assets/banner-light.svg" alt="Einundzwanzig im Light Mode">
+    <span class="brand-sub">KOBLENZ · 21MEETUP</span>
+  </a>
 
-    <img class="banner-dark" src="assets/banner-dark.svg" alt="Einundzwanzig Banner">
-    <img class="banner-light" src="assets/banner-light.svg" alt="Einundzwanzig Banner">
+  <nav class="main-nav" aria-label="Hauptnavigation">
+    <div class="nav-primary" aria-label="Hauptseiten">
+      <a class="page-link" data-page="index.html" href="index.html">Idee</a>
+      <a class="page-link" data-page="technik.html" href="technik.html">Badge-Technik</a>
+      <a class="page-link" data-page="funktionen.html" href="funktionen.html">Funktionen</a>
+      <a class="page-link" data-page="community.html" href="community.html">Community</a>
+      <a class="page-link" data-page="social.html" href="social.html">Koblenz &amp; Social</a>
+    </div>
 
-    <div data-include="components/nav.html"></div>
+    <details class="nav-group">
+      <summary>Direkt zu</summary>
+      <div class="nav-dropdown">
+        <a href="index.html#problem">Problem</a>
+        <a href="index.html#loesung">Lösung</a>
+        <a href="technik.html#nfc">NFC</a>
+        <a href="technik.html#rolling-qr">Rolling QR</a>
+        <a href="technik.html#signaturen">Signaturen</a>
+        <a href="technik.html#web-of-trust">Web of Trust</a>
+        <a href="funktionen.html#netzwerk">Netzwerkdaten</a>
+        <a href="funktionen.html#events">Events</a>
+      </div>
+    </details>
 
-</div>
-    <a href="index.html">
-        Badge Erklärung
-    </a>
+    <details class="nav-group">
+      <summary>Projekt</summary>
+      <div class="nav-dropdown">
+        <a href="https://zapstore.dev/apps/space.einundzwanzig.meetup" target="_blank" rel="noopener">App laden</a>
+        <a href="https://github.com/louisthecat86/Einundzwanzig-Meetup-App" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://portal.einundzwanzig.space/de/meetup/einundzwanzig-koblenz" target="_blank" rel="noopener">Koblenz-Termine</a>
+      </div>
+    </details>
+  </nav>
 
-    <a href="technik.html">
-        Technische Umsetzung
-    </a>
-
-    <a href="social.html">
-        Social Media
-    </a>
-<button class="theme-toggle" class="theme-toggle" aria-label="Theme wechseln">
-    <span class="theme-icon">🌙</span>
-</button>
-</nav>
+  <div class="header-controls">
+    <button class="theme-toggle header-theme-toggle" type="button" aria-label="Dark- oder Light-Mode wechseln" title="Dark- oder Light-Mode wechseln"><span class="theme-icon">☀</span></button>
+    <button class="menu-toggle" type="button" aria-label="Navigation öffnen" aria-expanded="false">☰</button>
+  </div>
+</header>

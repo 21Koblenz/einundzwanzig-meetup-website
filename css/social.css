@@ -1,0 +1,101 @@
+/* ============================================================
+   SOCIAL-SEITE, IDENTITÄT UND LIGHTNING-QR
+   ============================================================ */
+.social-list, .social-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.social-featured { grid-column: 1 / -1; }
+.social-link {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 18px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel);
+  text-decoration: none;
+}
+.social-link:hover { border-color: var(--orange); }
+.social-icon { font-size: 1.35rem; }
+.social-arrow { color: var(--orange); font-size: 1.4rem; }
+.npub { overflow-wrap: anywhere; color: var(--muted); font-size: 0.8rem; }
+
+.identity-card { text-align: center; }
+.identity-card .icon { margin-right: auto; margin-left: auto; }
+.identity-image {
+  display: block;
+  width: min(100%, 320px);
+  height: auto;
+  margin: 18px auto 22px;
+  border-radius: 18px;
+}
+.koblenz-card-logo { padding: 12px; background: #fff; }
+
+.project-banner-shell {
+  display: grid;
+  place-items: center;
+  gap: 18px;
+  min-height: 220px;
+  margin: 18px 0 24px;
+  padding: 32px 24px;
+  border: 1px solid rgba(247, 147, 26, 0.35);
+  border-radius: 20px;
+  background: #080808;
+  box-shadow: inset 0 0 40px rgba(247, 147, 26, 0.08), 0 0 35px rgba(247, 147, 26, 0.14);
+}
+:root[data-theme="light"] .project-banner-shell { background: #fff; }
+.project-banner-shell .banner-logo { width: min(100%, 430px); }
+.project-banner-shell span { color: var(--orange); font-weight: 900; letter-spacing: 0.3em; }
+
+.lightning-address {
+  display: block;
+  margin: 4px 0 18px;
+  color: var(--orange);
+  font-weight: 900;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+.qr-shell {
+  display: block;
+  width: min(290px, 100%);
+  margin: 0 auto;
+  padding: 18px;
+  border: 1px solid rgba(247, 147, 26, 0.60);
+  border-radius: 20px;
+  background: #080808;
+  box-shadow: inset 0 0 24px rgba(247, 147, 26, 0.08), 0 0 38px rgba(247, 147, 26, 0.22);
+  overflow: hidden;
+}
+.qr-shell img {
+  display: block !important;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+:root[data-theme="light"] .qr-shell { background: #fff; }
+.qr-note { color: var(--muted); font-size: 0.8rem; }
+
+.project-links { display: flex; flex-direction: column; }
+.mini-link {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+}
+.mini-link:last-child { border-bottom: 0; }
+.mini-link span { color: var(--muted); text-align: right; }
+
+
+.social-link.nostr-link {
+  border-color: rgba(143, 61, 255, 0.38);
+  background: linear-gradient(145deg, var(--panel), color-mix(in srgb, var(--panel) 90%, var(--nostr) 10%));
+}
+.social-link.nostr-link:hover {
+  border-color: var(--nostr);
+  box-shadow: 0 0 24px rgba(143, 61, 255, 0.24);
+}
+.social-link.nostr-link .social-arrow { color: var(--nostr-light); }

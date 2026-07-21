@@ -1,48 +1,79 @@
-<footer class="footer">
-    <div class="footer-container">
+<!-- ============================================================
+     FOOTER
+     Der Footer bleibt immer im dunklen Design – unabhängig vom
+     gewählten Seiten-Theme.
+     ============================================================ -->
+<footer class="site-footer">
 
-        <div class="footer-logo">
-            <img src="assets/logo1.svg" alt="21Meetup Logo">
-        </div>
-
-        <nav class="footer-nav">
-            <a href="index.html">Badge Erklärung</a>
-            <a href="technik.html">Technische Umsetzung</a>
-            <a href="social.html">Social Media</a>
-            <button class="theme-toggle" class="theme-toggle" aria-label="Theme wechseln">
-    <span class="theme-icon">🌙</span>
-</button>
-        </nav>
-
-        <div class="footer-social">
-            <a href="https://njump.me//npub1rl4wlgapxcapk0p3242kqcw7az584sjxgssuwh38u2gatk0cwewsudjz85" target="_blank" rel="noopener">Nostr</a>
-            <a href="https://t.me/Einundzwanzig_Ko" target="_blank" rel="noopener">Telegram</a>
-            <a href="https://x.com/EinundzwanzigKo" target="_blank" rel="noopener">Twitter / X</a>
-            <a href="https://t.me/benzinsatoshi" target="_blank" rel="noopener">Benzin in Sats</a>
-            <a href="https://portal.einundzwanzig.space/de/meetup/einundzwanzig-koblenz" target="_blank" rel="noopener">Einundzwanzig Portal</a>
-            <a href="https://github.com/louisthecat86/Einundzwanzig-Meetup-App" target="_blank" rel="noopener">21Meetup APP GitHub</a>
-
-            <a href="lightning:creamowl25@primal.net">v4v ⚡ Lightning</a>
-        </div>
-<div class="footer-lightning">
-    <p class="lightning-label">Value for Value ⚡ Lightning</p>
-
-    <a href="lightning:creamowl25@primal.net" class="lightning-address">
-        ⚡ creamowl25@primal.net
+  <!-- Stand der Website / verlinkte Bitcoin-Blockzeit -->
+  <div class="footer-update" aria-label="Aktualisierungsstand der Website">
+    <span>Aktualisiert</span>
+    <a
+      id="footerBlockLink"
+      class="footer-block-link"
+      href="https://mempool.space/de/block/958788"
+      target="_blank"
+      rel="noopener"
+    >
+      Blockzeit <strong id="footerBlockHeight">958.788</strong>
     </a>
+  </div>
 
-    <a href="lightning:creamowl25@primal.net">
-        <img class="lightning-qr qr-dark" src="assets/lightning-qr-white.svg" alt="Lightning QR Code">
-        <img class="lightning-qr qr-light" src="assets/lightning-qr-black.svg" alt="Lightning QR Code">
-    </a>
-</div>
+  <!-- Festes oranges Banner im schwarzen Footer -->
+  <a class="footer-banner" href="index.html" aria-label="Zur Startseite">
+    <img
+      class="footer-banner-logo"
+      src="assets/banner-dark.svg"
+      alt="Einundzwanzig 21Meetup"
+    >
+  </a>
 
+  <p class="footer-tagline">
+    <strong>21Meetup</strong>
+    <span>· Proof of Attendance für Bitcoin-Meetups</span>
+  </p>
 
-        </div>
+  <!-- Hauptseiten -->
+  <nav class="footer-links footer-main-links" aria-label="Footer-Hauptnavigation">
+    <a href="index.html">Idee</a>
+    <a href="technik.html">Badge-Technik</a>
+    <a href="funktionen.html">Funktionen</a>
+    <a href="community.html">Community</a>
+    <a href="social.html">Koblenz &amp; Social</a>
+  </nav>
 
-        <div class="footer-copy">
-             © 2026 Einundzwanzig Koblenz • Open Source • Forkable Meetup Website • Made with ₿ <br> <a href="https://mempool.space/de/block/958788" target="_blank" rel="noopener">aktualisiert 958788</a>
-        </div>
+  <!-- Direkte Sprungmarken und Projekt-Link -->
+  <nav class="footer-links" aria-label="Weitere Footer-Links">
+    <a href="technik.html#nfc-qr">NFC &amp; QR</a>
+    <a href="technik.html#signaturen">Signaturen</a>
+    <a href="technik.html#web-of-trust">Web of Trust</a>
+    <a href="funktionen.html#events">Events</a>
+    <a
+      href="https://github.com/louisthecat86/Einundzwanzig-Meetup-App"
+      target="_blank"
+      rel="noopener"
+    >GitHub</a>
+  </nav>
 
+  <!-- Value for Value: direkte Unterstützung per Lightning -->
+  <div class="footer-v4v" aria-label="Value for Value">
+    <p><strong>Value for Value</strong></p>
+    <div class="footer-v4v-links">
+      <a href="lightning:wolpertinger1@breez.fun">⚡ V4V App-Entwickler</a>
+      <a href="lightning:creamowl25@primal.net">⚡ V4V Webseitenersteller · 21 Koblenz</a>
     </div>
+  </div>
+
+  <!-- Zweiter Theme-Schalter für lange Seiten -->
+  <button
+    class="theme-toggle footer-theme-toggle"
+    type="button"
+    aria-label="Dark- oder Light-Mode wechseln"
+  >
+    <span class="theme-icon">☀</span>
+  </button>
+
+  <p class="footer-small">
+    Bitcoin only · Open Source · Dezentral · Kryptografisch · Souverän
+  </p>
 </footer>
